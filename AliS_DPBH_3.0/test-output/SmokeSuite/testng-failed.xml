@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [SmokeSuite]">
+  <test thread-count="5" name="Group Example(failed)">
+    <groups>
+      <run>
+        <include name="Smoke1"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.AliS.SmokeTestCases.SmokeTestCase1">
+        <methods>
+          <include name="SmokeTestCaseScenario1"/>
+        </methods>
+      </class> <!-- com.AliS.SmokeTestCases.SmokeTestCase1 -->
+      <class name="com.AliS.SmokeTestCases.SmokeTestCase3">
+        <methods>
+          <include name="SmokeTestCaseScenario3"/>
+        </methods>
+      </class> <!-- com.AliS.SmokeTestCases.SmokeTestCase3 -->
+      <class name="com.AliS.SmokeTestCases.SmokeTestCase2">
+        <methods>
+          <include name="SmokeTestCaseScenario2"/>
+        </methods>
+      </class> <!-- com.AliS.SmokeTestCases.SmokeTestCase2 -->
+    </classes>
+  </test> <!-- Group Example(failed) -->
+</suite> <!-- Failed suite [SmokeSuite] -->

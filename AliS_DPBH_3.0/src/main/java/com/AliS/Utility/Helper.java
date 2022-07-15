@@ -1,0 +1,146 @@
+package com.AliS.Utility;
+
+import java.awt.AWTException;
+import java.awt.HeadlessException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.imageio.ImageIO;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.io.FileHandler;
+
+public class Helper {
+
+
+	public static String captureScreenshot(WebDriver driver) {
+		//Code to capture screenshot 
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		
+		//code to copy the screenshot to desired location
+		String screenshotPath=System.getProperty("user.dir")+"/ScreenShots/AliSDPBH_"+ getCurrentDateTime() + ".png";
+		try {
+			
+			FileHandler.copy(src, new File(screenshotPath));
+
+			System.out.println("Screenshot Captured");
+
+		} catch (IOException e) {
+			System.out.println("Unable to Capture Screenshots" + e.getMessage());
+		}
+		return screenshotPath;
+	}
+
+	public static String getCurrentDateTime() {
+
+		String time = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+				
+		//DateFormat dateformat = new SimpleDateFormat("DD/mm/yyyy");
+		//Date CurrentDate = new Date();
+		//System.out.println(CurrentDate);
+		//dateformat.format(CurrentDate);
+		
+		return time;
+				
+	}
+	
+	public static void HandleDocumentUploadPopup(WebDriver driver, String comnt1) throws Exception {
+		//Document Upload section popup
+
+				WebElement Document= driver.findElement(By.xpath("//body[1]/app-root[1]/basepage[1]/div[2]/app-personal-information[1]/form[1]/cc-card-information[1]/div[1]/div[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[5]/span[1]/a[1]"));
+				Document.click();
+				
+				WebElement ADD1= driver.findElement(By.xpath("//body/div[1]/div[2]/div[1]/mat-dialog-container[1]/app-document-upload[1]/form[1]/cc-document-upload[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/strong[1]/a[1]"));
+				ADD1.click();
+				
+				WebElement ChooseFile= driver.findElement(By.xpath("//tbody/tr[1]/td[1]/input[1]"));
+				ChooseFile.sendKeys("C:\\Users\\abhardwaj\\Desktop\\TESTDO~1\\TESTLA~1.DOC");
+				
+				WebElement uploadComment=driver.findElement(By.xpath("//tbody/tr[1]/td[2]/textarea[1]"));
+				uploadComment.sendKeys(comnt1);
+				
+				WebElement UploadButton=driver.findElement(By.xpath("//button[contains(text(),'Upload')]"));
+				UploadButton.click();
+
+	}
+	
+	public static void ReadPDFTest() throws IOException {
+		URL url=new URL("");
+		
+		InputStream is =url.openStream();
+		BufferedInputStream fileParse =new BufferedInputStream(is);
+		PDDocument document=null;
+		
+		document =PDDocument.load(fileParse);
+		String pdfContent =new PDFTextStripper().getText(document);
+		System.out.println(pdfContent);
+		
+		
+}
+	public static void HandleAlertWindow1(WebDriver driver) throws Exception {
+		// Alert Class object is used to handle Alert window of application
+		Alert alert = driver.switchTo().alert();
+		System.out.println(alert.getText());// this sysout is used to print alert text
+		alert.accept();// this method to click alert ok button
+		//alert.dismiss();//this method to click cancel button
+		
+		boolean turnedOn = true;
+		if(turnedOn) // Here, you are saying "if turnedOn (is true, that's implicit)
+		{
+			
+			//WebElement ReturntoLoginservices=driver.findElement(By.xpath("//span[contains(text(),'Relogin to Online Services')]"));
+			//ReturntoLoginservices.click();
+			driver.get("http://172.16.1.32/ALiSDPBH2TESTING11.1.125/login.aspx?BusinessUnit=HCQC");
+			Thread.sleep(3000);
+		}
+		else // if it is NOT true (it is false)
+		{
+			System.out.println("System unable to find alert after logout button click");
+		}
+	}
+	
+	
+	public static  void HandleAlertWindow_common(WebDriver driver) throws Exception {
+		// Alert Class object is used to handle Alert window of application
+		Alert alert = driver.switchTo().alert();
+		System.out.println(alert.getText());// this sysout is used to print alert text
+		alert.accept();// this method to click alert ok button
+		//alert.dismiss();//this method to click cancel button
+	
+		boolean turnedOn = true;
+		if(turnedOn) // Here, you are saying "if turnedOn (is true, that's implicit)
+		{
+	
+			System.out.println("System able to find alert on Home Page");
+		}
+		else // if it is NOT true (it is false)
+		{
+			System.out.println("System unable to find alert on Home Page");
+		}
+	}
+	
+	public static void AlertScrenshot(WebDriver driver) throws HeadlessException, AWTException, IOException {
+		BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+		ImageIO.write(image, "png", new File("C:\\Users\\abhardwaj\\eclipse-workspace\\AliS_DPBH_3.0\\AlertSS"));
+		driver.switchTo().alert().accept();
+	}	
+	
+	
+}
+

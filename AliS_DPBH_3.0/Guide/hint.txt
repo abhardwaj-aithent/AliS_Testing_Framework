@@ -1,0 +1,10 @@
+1. Smoke Test Case1 1:- 
+Expected Result :- "Renewal Application Alert Handle"  
+Actual Result :- 
+If Fail so capture screen shot .
+
+
+1. Smoke Test Case1 2:- 
+Expected Result :- "Renewal Application Alert Handle"  
+Actual Result :- 
+If Fail so capture screen shot . 
