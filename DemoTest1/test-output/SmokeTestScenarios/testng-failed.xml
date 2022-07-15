@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [SmokeTestScenarios]">
+  <test thread-count="5" name="RenewalApplicationTest(failed)">
+    <classes>
+      <class name="com.AliS.SmokeTestCases.SmokeTestCase1">
+        <methods>
+          <include name="Individual_Information_Tab_TestCase1"/>
+          <include name="TearDown"/>
+          <include name="setupSuite"/>
+          <include name="setup"/>
+          <include name="tearDownMethod"/>
+        </methods>
+      </class> <!-- com.AliS.SmokeTestCases.SmokeTestCase1 -->
+    </classes>
+  </test> <!-- RenewalApplicationTest(failed) -->
+</suite> <!-- Failed suite [SmokeTestScenarios] -->
