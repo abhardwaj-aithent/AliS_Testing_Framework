@@ -64,7 +64,7 @@ public class Address_Information_Tab {
 		Select sel=new Select(driver.findElement(By.xpath("//select[@id='ddlCopy_RES']")));
 		sel.selectByVisibleText("Individual Mailing Address");
 		Thread.sleep(2000);
-		
+		Thread.sleep(2000);
 	}
 	
 	public void NextButton() {
